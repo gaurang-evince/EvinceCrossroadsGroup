@@ -1,10 +1,24 @@
 <h2>History of Github Commits</h2>
-<p>{{author.name}}</p>
-<p>{{commit.message}}</p>
 
-<ng-container *ngFor="let d of fileList" class="row">
-    <div>
-        <p>{{d.filename}}</p>
-        <p>{{d.status}}</p>
-    </div>
-</ng-container>
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>SHA</th>
+                <th>Committer Name</th>
+                <th>Comments</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let c of commitsList" class="row">
+                <tr>
+                    <td>{{c.sha}}</td>
+                    <td>{{c.commit.committer.name}}</td>
+                    <td>{{c.commit.message}}</td>
+                    <td>{{c.commit.committer.date | date}}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

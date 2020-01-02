@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { utils } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GithubCommitsService {
 
-  private api_server = "https://api.github.com/repos/gaurang-evince/EvinceCrossroadsGroup/commits/f02bcfe6c77ce4dcbdc62f1ad33d79f09907ac69";
-  
+  private api_server = "https://api.github.com/repos/gaurang-evince/EvinceCrossroadsGroup/commits";
+
   constructor(private httpClient: HttpClient) { }
-  public pullGithubCommits(){    
+  public pullGithubCommits() {
     return this.httpClient.get(this.api_server);
   }
+
 }

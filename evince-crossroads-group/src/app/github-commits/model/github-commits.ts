@@ -10,12 +10,7 @@ export class CommitterModel {
 }
 export class CommitModel {
     author: AuthorModel;
-    commitor: CommitterModel;
+    committer: CommitterModel;
     message: string;
-}
-
-export class FileModel {
-    filename: string;
-    status:string;
-
+    sha:string;  
 }

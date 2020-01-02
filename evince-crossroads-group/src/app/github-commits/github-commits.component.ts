@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubCommitsService } from '../github-commits.service';
-import { CommitModel, FileModel, CommitterModel, AuthorModel } from './model/github-commits';
+import { CommitModel, CommitterModel, AuthorModel } from './model/github-commits';
 
 @Component({
   selector: 'app-github-commits',
@@ -8,34 +8,36 @@ import { CommitModel, FileModel, CommitterModel, AuthorModel } from './model/git
   styleUrls: ['./github-commits.component.scss']
 })
 export class GithubCommitsComponent implements OnInit {
-
-  responseData: any;
   commit: CommitModel = new CommitModel();
   author: AuthorModel = new AuthorModel();
   committer: CommitterModel = new CommitterModel();
-  fileList: FileModel[] = [];
+
+  commitsList: any[] = [];
   constructor(private githubCommitsService: GithubCommitsService) { }
 
   ngOnInit() {
     this.githubCommitsService.pullGithubCommits().subscribe((response: any) => {
 
-      const commitData = <CommitModel>response.commit;
-      const authorData = <AuthorModel>response.commit.author;
-      const CommitterData = <CommitterModel>response.commit.commitor;
+      this.commitsList = response;
 
-      this.author = authorData;
-      this.committer = CommitterData;
+      this.commitsList.forEach(e => {
 
-      this.commit = {
-        author: this.author,
-        commitor: this.committer,
-        message: commitData.message
-      };
+        const commitData = <CommitModel>e.commit;
+        const authorData = <AuthorModel>e.commit.author;
+        const CommitterData = <CommitterModel>e.commit.commitor;
+        const sha = e.sha;
 
-      const fList = <FileModel[]>response.files;
-      this.fileList = fList;
+        this.author = authorData;
+        this.committer = CommitterData;
+
+        this.commit = {
+          author: this.author,
+          committer: this.committer,
+          sha: sha,
+          message: commitData.message
+        };
+      });
 
     });
   }
-
 }
