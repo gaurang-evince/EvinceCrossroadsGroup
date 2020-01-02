@@ -16,7 +16,7 @@
                     <td>{{c.sha}}</td>
                     <td>{{c.commit.committer.name}}</td>
                     <td>{{c.commit.message}}</td>
-                    <td>{{c.commit.committer.date | date}}</td>
+                    <td>{{c.commit.committer.date | date:'medium' }}</td>
                 </tr>
             </ng-container>
         </tbody>
