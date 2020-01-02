@@ -1,0 +1,10 @@
+<h2>History of Github Commits</h2>
+<p>{{author.name}}</p>
+<p>{{commit.message}}</p>
+
+<ng-container *ngFor="let d of fileList" class="row">
+    <div>
+        <p>{{d.filename}}</p>
+        <p>{{d.status}}</p>
+    </div>
+</ng-container>
